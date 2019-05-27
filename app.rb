@@ -18,6 +18,7 @@ configure do
 	@db.execute 'CREATE TABLE IF NOT EXISTS Posts 
 	(
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		name TEXT,
 		created_date DATE,
 		content TEXT
 	)'
@@ -41,14 +42,19 @@ get '/new' do
 end
 
 post '/new' do
-  	content = params[:content]
+	@name = params[:name]
+  	@content = params[:content]
 
-  	if content.length <= 0
-  		@error = 'Enter text'
-  		return erb :new
-  	end
+  	hh = {:name => 'Enter your name',
+	:content => 'Enter your message'}
 
-  	@db.execute 'insert into Posts (created_date, content) values (datetime(), ?)', [content]
+	@error = hh.select{|key,_| params[key] == ""}.values.join(", ")
+
+	if @error != '' 		
+		return erb :new
+	end
+
+  	@db.execute 'insert into Posts (name, created_date, content) values (?, datetime(), ?)', [@name, @content]
   	
   	redirect to '/'
 end
