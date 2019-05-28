@@ -75,18 +75,30 @@ post '/detales/:post_id' do
 	post_id = params[:post_id]
 	content = params[:content]
 
-	@db.execute 'insert into Comments 
-		(
-			created_date,
-			content,
-			post_id
-		) values 
-		(
-			datetime(),
-			?,
-			?
-		)', [content, post_id]
+	if content.chomp.empty? 
+		@error = "Enter comment"
 
-	redirect to '/detales/' + post_id
+		results = @db.execute 'select * from Posts where id=?', [post_id]
+		
+		@row = results[0]
+
+		@comments = @db.execute 'select * from Comments where post_id=? order by id', [post_id]
+
+		erb :detales
+	else
+		@db.execute 'insert into Comments 
+			(
+				created_date,
+				content,
+				post_id
+			) values 
+			(
+				datetime(),
+				?,
+				?
+			)', [content, post_id]
+
+		redirect to '/detales/' + post_id
+	end
 end
 
