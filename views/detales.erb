@@ -1,9 +1,9 @@
 <h3>Post detales</h3>
 <br />
 <p>
-	<%= @row['content'] %>
-	<br />
-	Added at <%= @row['created_date'] %>	
+  <%= @row['content'] %>
+  <br />
+  Added at <%= @row['created_date'] %>
 </p>
 <br />
 <h4>Comments</h4>
@@ -11,20 +11,20 @@
 <hr />
 
 <% @comments.each do |comment| %>
-	<p>
-		<%= comment['content'] %>
-		<br />
-		<span style="font-size: 75%; color: #999">Added at <%= comment['created_date'] %></span>
-		<br />		
-	</p>
+  <p>
+    <%= comment['content'] %>
+    <br />
+    <span style="font-size: 75%; color: #999">Added at <%= comment['created_date'] %></span>
+    <br />
+  </p>
 
-	<hr />
+  <hr />
 <% end %>
 
-<form action="/detales/<%= @row['id'] %>" method="POST" role="form">	 
-		<div class="form-group">
-		    <textarea name="content" class="form-control" rows="6" placeholder="Enter your comment here"></textarea>
-	  	</div> 
-	  	</br>
-	  	<button type="submit" class="btn btn-primary">Add comment</button>
-	</form>
+<form action="/detales/<%= @row['id'] %>" method="POST" role="form">
+  <div class="form-group">
+    <textarea name="content" class="form-control" rows="6" placeholder="Enter your comment here"></textarea>
+  </div>
+  </br>
+  <button type="submit" class="btn btn-primary">Add comment</button>
+</form>

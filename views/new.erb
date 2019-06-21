@@ -1,10 +1,12 @@
 <h1>Add your post</h1>
 <p>
-	<form action="/new" method="POST" role="form">	 
-		<input name='name' type="text" class="form-control" placeholder="Enter Your name" value="<%= @name %>">
-		</br>
-		<textarea name="content" class="form-control" rows="6" placeholder="Enter your post here"><%= @content %></textarea>
-	  	</br>
-	  	<button type="submit" class="btn btn-primary">Submit</button>
-	</form>
+  <form action="/new" method="POST" role="form">
+    <input name='name' type="text" class="form-control" placeholder="Enter Your name" value="<%= @name %>">
+    </br>
+    <textarea name="content" class="form-control" rows="6" placeholder="Enter your post here">
+      <%= @content %>
+    </textarea>
+    </br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </p>
